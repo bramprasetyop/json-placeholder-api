@@ -1,0 +1,9 @@
+.albums{
+  &-image{
+    max-height: 400px;
+    overflow-y: scroll;
+    img {
+      cursor: pointer;
+    }
+  }
+}

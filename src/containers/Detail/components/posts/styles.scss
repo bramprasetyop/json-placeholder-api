@@ -1,0 +1,27 @@
+.posts {
+  &-add-post {
+    .MuiCard-root {
+      background: #f60;
+      color: white;
+      margin-bottom: 8px;
+    }
+  }
+  &-image {
+    padding-top: 16px;
+    &-avatar {
+      display: flex;
+      justify-content: space-between;
+      div {
+        display: flex;
+        align-items: center;
+        label{
+          margin-left: 8px;
+          font-weight: 600;
+        }
+      }
+    }
+    p{
+      font-style: italic;
+    }
+  }
+}

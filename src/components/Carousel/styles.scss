@@ -1,0 +1,17 @@
+.carousel {
+  text-align: start;
+  a{
+    text-decoration: none;
+    color: #000;
+    &:hover{
+      opacity: 0.6;
+    }
+    h1 {
+      color: #f60;
+      font-weight: normal;
+    }
+  }
+  p{
+    font-style: italic;
+  }
+}

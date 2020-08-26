@@ -28,6 +28,26 @@
   color: #61dafb;
 }
 
+h1 {
+  color: #f60;
+  font-weight: normal;
+}
+
+a{
+  text-decoration: none;
+  color: #000;
+  &:hover{
+    opacity: 0.6;
+  }
+}
+p{
+  text-align: justify;
+}
+
+hr{
+  border: 1px solid gainsboro;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

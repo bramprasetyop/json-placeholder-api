@@ -1,0 +1,14 @@
+.home {
+  padding: 60px;
+  &-button{
+    margin-bottom: 16px !important;
+    background: #231f20;
+    opacity: 0.8;
+    &:hover{
+      opacity: 1;
+    }
+    &.active {
+      opacity: 1;
+    }
+  }
+}
