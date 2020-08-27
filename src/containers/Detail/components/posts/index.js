@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { fetchUserPosts, fetchUserComments } from '../../../../actions/index';
+import { fetchUserPosts, fetchUserComments, fetchEditUserPost, fetchDeleteUserPost } from '../../../../actions/index';
 import { Card, CardContent, Typography, Avatar, CardActions, Button, Grid, CardActionArea } from '@material-ui/core'
 import Loading from '../../../../components/Loading/index'
 import ImageMale from '../../../../assets/image/img_1.jpeg'
@@ -50,18 +50,31 @@ class Album extends Component {
     })
   }
 
-  handleChangeBody(e) {}
+  handleChangeEditBodyPost(e) {}
 
-  handleChangeTitle(e) {}
+  handleChangeEditTitlePost(e) {}
 
-  handleSubmit(e, data) {
+  handleSubmitEditPost(e, data) {
     e.preventDefault();
+    const paramId = this.props.match.params.id
     let dataForm = {}
     dataForm.id = data.postId
     dataForm.userId = data.userId
     dataForm.title = e.target[0].value
     dataForm.body = e.target[2].value
-    console.log(dataForm)
+    const confirmEdit = window.confirm("Do you really want to save changes?"); 
+    if(confirmEdit === true){
+      this.props.dispatch(fetchEditUserPost(dataForm))
+    }
+    this.showEdit()
+    this.props.dispatch(fetchUserPosts(paramId))
+  }
+
+  deletePost(id) {
+    const confirmDelete = window.confirm("Do you really want to delete post?"); 
+    if(confirmDelete){
+      this.props.dispatch(fetchDeleteUserPost(Number(id)))
+    }
   }
 
   showEdit(id) {
@@ -104,7 +117,7 @@ class Album extends Component {
                 <Button size="small" color="primary" onClick={() => this.getComments(post.id)}>
                   {showComments && indexPost === post.id ? 'Hide Comments' : 'Show Comments'}
                 </Button>
-                <Button size="small" color="primary">
+                <Button size="small" color="primary" onClick={() => this.deletePost(post.id)}>
                   Delete
                 </Button>
                 <Button size="small" color="primary" onClick={() => this.showEdit(post.id)}>
@@ -115,14 +128,15 @@ class Album extends Component {
             {
               showEdit && indexEdit === post.id ? (
                 <Form
+                labelbutton="Save"
                 header="Edit Post"
                 label="Title"
                 textarea="Body"
                 title={post.title}
                 body={post.body}
-                handleChangeTitle={ (e) => this.handleChangeTitle(e.target.value)}
-                handleChangeBody={(e) => this.handleChangeBody(e.target.value)}
-                handleSubmit={(e) => this.handleSubmit(e, {postId: post.id, userId: post.userId})}
+                handleChangeTitle={ (e) => this.handleChangeEditTitlePost(e.target.value)}
+                handleChangeBody={(e) => this.handleChangeEditBodyPost(e.target.value)}
+                handleSubmit={(e) => this.handleSubmitEditPost(e, {postId: post.id, userId: post.userId})}
                 closeEdit={() => this.showEdit()}
               />
               ) : null

@@ -119,3 +119,31 @@ export const fetchUserComments = (id) => {
     })
   }
 }
+
+export const fetchEditUserPost = (dataEdit) => {
+  const userEditPost = `https://jsonplaceholder.typicode.com/posts/${dataEdit.id}`
+  return () => {
+    return axios.put(userEditPost, dataEdit)
+    .then(({data}) => {
+      window.confirm(`Success edit your post! output: ${JSON.stringify(data, 0, 2)}`)
+      return data
+    })
+    .catch((error) => {
+      throw (error)
+    })
+  }
+}
+
+export const fetchDeleteUserPost = (id) => {
+  const userDeletePost = `https://jsonplaceholder.typicode.com/posts/${id}`
+  return () => {
+    return axios.delete(userDeletePost)
+    .then(({data}) => {
+      window.confirm('Success delete your post!')
+      return data
+    })
+    .catch((error) => {
+      throw (error)
+    })
+  }
+}

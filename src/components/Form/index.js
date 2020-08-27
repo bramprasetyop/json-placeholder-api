@@ -9,13 +9,13 @@ class Form extends Component {
   }
 
   render() {
-    const {label, title, textarea, body, header} = this.props
+    const {label, title, textarea, body, header, labelbutton} = this.props
     return (
       <div className="form">
         <h3>{header}</h3>
         <form onSubmit={this.props.handleSubmit}>
           <div>
-            <TextField
+            {label ? (<TextField
               fullWidth
               required
               id="outlined-required"
@@ -23,10 +23,10 @@ class Form extends Component {
               defaultValue={title}
               variant="outlined"
               onChange={ this.props.handleChangeTitle}
-            />
+            />) : null }
           </div>
           <div>
-            <TextField
+            {textarea ? (<TextField
               fullWidth
               required
               id="outlined-required"
@@ -34,9 +34,9 @@ class Form extends Component {
               defaultValue={body}
               variant="outlined"
               onChange={ this.props.handleChangeTitle}
-            />
+            />) : null}
           </div>
-          <Button type="submit" variant="contained" color="primary">SUBMIT</Button>
+          <Button type="submit" variant="contained" color="primary">{labelbutton}</Button>
           <Button variant="contained" color="secondary" onClick={this.props.closeEdit}>Cancel</Button>
         </form>
       </div>
