@@ -2,6 +2,12 @@
   background: #f6f6f6;
   padding: 60px 120px;
   text-align: start;
+  @media (max-width: 768px) {
+    img{
+      display: none;
+    }
+    padding: 32px;
+  }
   img {
     width: 100%;
     object-fit: cover;

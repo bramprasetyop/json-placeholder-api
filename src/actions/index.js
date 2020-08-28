@@ -147,3 +147,59 @@ export const fetchDeleteUserPost = (id) => {
     })
   }
 }
+
+export const fetchCreateUserPost = (dataAdd) => {
+  const userAddPost = `https://jsonplaceholder.typicode.com/posts`
+  return () => {
+    return axios.post(userAddPost, dataAdd)
+    .then(({data}) => {
+      window.confirm(`Success add your post! output: ${JSON.stringify(data, 0, 2)}`)
+      return data
+    })
+    .catch((error) => {
+      throw (error)
+    })
+  }
+}
+
+export const fetchCreateUserPostComment = (dataAdd) => {
+  const userAddComment = `https://jsonplaceholder.typicode.com/comments`
+  return () => {
+    return axios.post(userAddComment, dataAdd)
+    .then(({data}) => {
+      window.confirm(`Success add your comment! output: ${JSON.stringify(data, 0, 2)}`)
+      return data
+    })
+    .catch((error) => {
+      throw (error)
+    })
+  }
+}
+
+export const fetchDeleteUserPostComment = (id) => {
+  const userDeletePostcomment = `https://jsonplaceholder.typicode.com/comments/${id}`
+  return () => {
+    return axios.delete(userDeletePostcomment)
+    .then(({data}) => {
+      window.confirm('Success delete your comment!')
+      return data
+    })
+    .catch((error) => {
+      throw (error)
+    })
+  }
+}
+
+export const fetchEditUserPostComment = (dataEdit) => {
+  const userEditPostComment = `https://jsonplaceholder.typicode.com/comments/${dataEdit.id}`
+  return () => {
+    return axios.put(userEditPostComment, dataEdit)
+    .then(({data}) => {
+      window.confirm(`Success edit your comment! output: ${JSON.stringify(data, 0, 2)}`)
+      return data
+    })
+    .catch((error) => {
+      throw (error)
+    })
+  }
+}

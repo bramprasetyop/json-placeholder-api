@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { fetchUserAlbum, fetchUserAlbumPhoto } from '../../../../actions/index';
+import { CircularProgress, Card, CardContent, Typography, CardActions, Button } from '@material-ui/core';
+import CancelIcon from '@material-ui/icons/Cancel';
 import ModalComponent from '../../../../components/Modal/index'
 import Loading from '../../../../components/Loading/index'
 import _ from 'lodash'
@@ -20,7 +22,8 @@ class Album extends Component {
     this.state = {
       showPhotoAlbum: false,
       showModal: false,
-      photoUrl: ''
+      photoUrl: '',
+      indexAlbum: 0
     }
   }
 
@@ -32,13 +35,26 @@ class Album extends Component {
     }
   }
 
+  modalBody() {
+    const { photoUrl } = this.state
+    return (
+      <div className="modal-component">
+        <div className="modal-component-close-button"><CancelIcon fontSize="large" onClick={() => this.handleClose()} /></div>
+        <div className="modal-component-image">
+          { photoUrl ? <img src={photoUrl} alt={photoUrl} /> : <CircularProgress/> }
+        </div>
+      </div>
+    )
+  }
+
   detailAlbum(id) {
     const { showPhotoAlbum } = this.state
     if (!showPhotoAlbum) {
       this.props.dispatch(fetchUserAlbumPhoto(id))
     }
     this.setState({
-      showPhotoAlbum: !this.state.showPhotoAlbum
+      showPhotoAlbum: !showPhotoAlbum,
+      indexAlbum: id
     })
   }
 
@@ -57,15 +73,28 @@ class Album extends Component {
 
   render() {
     const { albums, loading, photoAlbums } = this.props
-    const { showModal, photoUrl, showPhotoAlbum } = this.state
+    const { showModal, showPhotoAlbum, indexAlbum } = this.state
     return (
       <div className="albums">
         {loading && <Loading/>}
-        <h1>ini albums</h1>
         {
           albums.map((album, i) => 
           <div key={i} >
-            <h3 onClick={() => this.detailAlbum(album.id)}> {album.title} </h3>
+            <Card className="posts-card">
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {album.title}
+                </Typography>
+                {/* <Typography gutterBottom variant="h6" component="h2">
+                  {post.body}
+                </Typography> */}
+              </CardContent>
+              <CardActions>
+                <Button size="small" color="primary" onClick={() => this.detailAlbum(album.id)}>
+                  {showPhotoAlbum && indexAlbum === album.id ? 'Hide Album' : 'Show Album'}
+                </Button>
+              </CardActions>
+            </Card>
             <div className="albums-image">
               {
                 photoAlbums ? photoAlbums.map((photo, i) => {
@@ -82,7 +111,7 @@ class Album extends Component {
         <ModalComponent
           open={showModal}
           handleClose={() => this.handleClose()}
-          photourl={photoUrl}
+          modalbody={this.modalBody()}
         />
       </div>
     )

@@ -1,4 +1,10 @@
 .home {
+  @media (max-width: 768px) {
+    padding: 32px;
+    hr {
+      display: none;
+    }
+  }
   padding: 60px;
   &-button{
     margin-bottom: 16px !important;

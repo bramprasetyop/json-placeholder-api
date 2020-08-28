@@ -9,7 +9,7 @@ export default class index extends Component {
   render() {
     return (
       <div className="header">
-        <Grid container spacing={2}>
+        <Grid container spacing={2} justify="center" alignItems="center">
           <Grid item lg={6} md={6}>
             <Link to={{pathname:`/`}}>
               <h1>Meet Our Authors</h1>

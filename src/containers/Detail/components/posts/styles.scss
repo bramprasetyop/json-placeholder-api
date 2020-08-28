@@ -1,22 +1,41 @@
 .posts {
+  &-card{
+    margin: 16px 0;
+  }
   &-add-post {
     .MuiCard-root {
       background: #f60;
       color: white;
       margin-bottom: 8px;
     }
+    &-body {
+      width: 50%;
+      background: #fff;
+      padding: 8px;
+      border-radius: 4px;
+      &:focus{
+        outline: none;
+      }
+      @media (max-width: 767px) {
+        width: 70%;
+      }
+    }
   }
   &-image {
-    padding-top: 16px;
-    &-avatar {
-      display: flex;
-      justify-content: space-between;
-      div {
+    padding: 8px;
+    &-card {
+      margin: 16px 0;
+      padding: 8px;
+      &-avatar {
         display: flex;
-        align-items: center;
-        label{
-          margin-left: 8px;
-          font-weight: 600;
+        justify-content: space-between;
+        div {
+          display: flex;
+          align-items: center;
+          label{
+            margin-left: 8px;
+            font-weight: 600;
+          }
         }
       }
     }
