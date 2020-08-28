@@ -123,7 +123,6 @@ class Album extends Component {
       dataForm.id = data.commentId
       if(this.windowConfirm(str) === true){
         this.props.dispatch(fetchEditUserPostComment(dataForm))
-        console.log(dataForm)
       }
       this.showEdit({showComment: true})
     }

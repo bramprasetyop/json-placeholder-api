@@ -22,5 +22,3 @@ Or open this link [https://json-placeholder.vercel.app/](https://json-placeholde
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
-
-### `yarn test`
